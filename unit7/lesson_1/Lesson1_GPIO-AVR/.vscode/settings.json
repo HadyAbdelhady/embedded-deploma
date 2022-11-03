@@ -1,0 +1,48 @@
+{
+  "C_Cpp_Runner.cCompilerPath": "C:/Users/Administrator/.platformio/packages/toolchain-atmelavr/bin/avr-gcc.exe",
+  "C_Cpp_Runner.cppCompilerPath": "C:/Users/Administrator/.platformio/packages/toolchain-atmelavr/bin/avr-g++.exe",
+  "C_Cpp_Runner.debuggerPath": "C:/Users/Administrator/.platformio/packages/toolchain-atmelavr/bin/avr-gdb.exe",
+  "C_Cpp_Runner.cStandard": "c11",
+  "C_Cpp_Runner.cppStandard": "c++17",
+  "C_Cpp_Runner.msvcBatchPath": "",
+  "C_Cpp_Runner.useMsvc": false,
+  "C_Cpp_Runner.warnings": [
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic"
+  ],
+  "C_Cpp_Runner.enableWarnings": true,
+  "C_Cpp_Runner.warningsAsError": false,
+  "C_Cpp_Runner.compilerArgs": [],
+  "C_Cpp_Runner.linkerArgs": [],
+  "C_Cpp_Runner.includePaths": [
+    "z:/embedded diploma/ledToggle/include",
+    "z:/embedded diploma/ledToggle/src",
+    "C:/Users/Administrator/.platformio/packages/framework-arduino-avr-mightycore/cores/MightyCore",
+    "C:/Users/Administrator/.platformio/packages/framework-arduino-avr-mightycore/variants/standard",
+    "C:/Users/Administrator/.platformio/packages/framework-arduino-avr-mightycore/libraries/AVR_examples/src",
+    "C:/Users/Administrator/.platformio/packages/framework-arduino-avr-mightycore/libraries/EEPROM/src",
+    "C:/Users/Administrator/.platformio/packages/framework-arduino-avr-mightycore/libraries/Optiboot_flasher/src",
+    "C:/Users/Administrator/.platformio/packages/framework-arduino-avr-mightycore/libraries/SD/src",
+    "C:/Users/Administrator/.platformio/packages/framework-arduino-avr-mightycore/libraries/SPI/src",
+    "C:/Users/Administrator/.platformio/packages/framework-arduino-avr-mightycore/libraries/SPI1/src",
+    "C:/Users/Administrator/.platformio/packages/framework-arduino-avr-mightycore/libraries/Servo/src",
+    "C:/Users/Administrator/.platformio/packages/framework-arduino-avr-mightycore/libraries/SoftwareSerial/src",
+    "C:/Users/Administrator/.platformio/packages/framework-arduino-avr-mightycore/libraries/Timer/src",
+    "C:/Users/Administrator/.platformio/packages/framework-arduino-avr-mightycore/libraries/Wire/src",
+    "C:/Users/Administrator/.platformio/packages/framework-arduino-avr-mightycore/libraries/Wire1/src",
+    ""
+  ],
+  "C_Cpp_Runner.includeSearch": [
+    "*",
+    "**/*"
+  ],
+  "C_Cpp_Runner.excludeSearch": [
+    "**/build",
+    "**/build/**",
+    "**/.*",
+    "**/.*/**",
+    "**/.vscode",
+    "**/.vscode/**"
+  ]
+}
