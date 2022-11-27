@@ -49,7 +49,7 @@
 void init_LCD(void);
 void Write_CMD_LCD(unsigned char command);
 void Write_char_LCD(unsigned char data);
-void Write_String_LCD(char *data);
+void Write_String_LCD(char *data, char row, char col);
 void GotoXY_LCD(unsigned char x, unsigned char y);
 void Busy_LCD(void);
 void Clear_LCD(void);

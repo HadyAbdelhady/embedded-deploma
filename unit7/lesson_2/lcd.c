@@ -2,13 +2,14 @@
 #define EIGHT_BIT
 void E_LCD()
 {
+    // refresh the enable pin
     CLR_BIT(LCD_CTRL, E);
     delay;
     SET_BIT(LCD_CTRL, E);
 }
 void Busy_LCD()
 {
-    DateDir_LCD_PORT &= ~(0xFF << 4); // to be active in 4 bits only
+    DateDir_LCD_PORT &= ~(0xFF << 4); // to be active in 4 bits also
     SET_BIT(LCD_CTRL, RW);            // readmode
     CLR_BIT(LCD_CTRL, RS);
     E_LCD();
@@ -47,7 +48,7 @@ void Write_char_LCD(unsigned char data)
 #ifdef EIGHT_BIT
     LCD_PORT = data;
     CLR_BIT(LCD_CTRL, RW);
-    CLR_BIT(LCD_CTRL, RS);
+    SET_BIT(LCD_CTRL, RS);
     delay;
     E_LCD();
 #elif FOUR_BIT
@@ -75,8 +76,10 @@ void init_LCD(void)
     CLR_BIT(LCD_CTRL, RW);
     CLR_BIT(LCD_CTRL, RS);
     DateDir_LCD_PORT = 0xFF; // output
+    Write_CMD_LCD(Display_on_cursor_blinking);
     Clear_LCD();
 #ifdef EIGHT_BIT
+    Write_CMD_LCD(Return_home);
     Write_CMD_LCD(_2_lines_8_Bit);
 #elif FOUR_BIT
     Write_CMD_LCD(Return_home);
@@ -88,54 +91,48 @@ void init_LCD(void)
 }
 void GotoXY_LCD(unsigned char x, unsigned char y)
 {
-    if (x == 1)
-    {
-        if (y < 32 && y >= 0)
-        {
-            Write_CMD_LCD(Force_cursor_to_beginning_1st_line + y);
-        }
-    }
-    else if (x == 2)
-    {
-        if (y < 32 && y >= 0)
-        {
-            Write_CMD_LCD(Force_cursor_to_beginning_2nd_line + y);
-        }
-    }
+    if (x == 1 && y < 16)
+        Write_CMD_LCD(Force_cursor_to_beginning_1st_line + y);
+    else if (x == 2 && y < 16)
+        Write_CMD_LCD(Force_cursor_to_beginning_2nd_line + y);
 }
-void Write_String_LCD(char *data)
+void Write_String_LCD(char *data, char row, char col)
 {
-    int count = 0;
-    while (*data > 0)
+    int index = 0, line0 = 0; // line0 is to make the cursor move from 0,16 to 1,0
+    GotoXY_LCD(row, col);
+    while (data[index] != '\n' && ((row * 16) + (col + index)) < 32) // calculate the current cursor
     {
-        count++;
-        Write_char_LCD(data++);
-        if (count == 16)
-            GotoXY_LCD(2, 0);
-        else if (count == 32)
+        if (((row * 16) + (col + index)) < 16)
+            Write_char_LCD(data[index++]);
+        else if (((row * 16) + (col + index)) == 16 && line0 == 0) // if line 1 is finished
         {
-            Clear_LCD();
             GotoXY_LCD(1, 0);
-            count = 0;
+            line0++;
         }
+        else if (((row * 16) + (col + index)) < 32 && line0 == 1)
+            Write_char_LCD(data[index++]);
     }
 }
-
-void CustomChar_LCD(char *Copy_pu8Pattern, char Copy_u8PatternNumber,char Copy_u8XPOS,char Copy_u8YPOS){
-	char Local_u8Address =0;
-	//Copy_u8PatternNumber maybe 0,1,2 -- 7
-	//CGram consists of 8 locations so if i wanna get the address:
-	Local_u8Address =8 *Copy_u8PatternNumber;
-	//go to this address by the key of CGram "its address 64"
-	CLCD_VidSendCommand (64+ Local_u8Address);
-	//write on this address
-	for(char i=0; i<8;i++){
-		//byte by byte for each location of the 8 ones
-		//send data to cgram it won't appear on lcd
-		CLCD_VidSendData (Copy_pu8Pattern[i]);
-	}
-	//3awz a5rog mn CGRAm w aro7 ll DDRam 34an a write on LCD
-	CLCD_VidGotoXY(Copy_u8XPOS,Copy_u8YPOS);
-	//show data of each pattern on the lcd
-	CLCD_VidSendData (Copy_u8PatternNumber);
+void CustomChar_LCD(char *Pattern, char CGram_index, char X, char Y)
+{
+    // CGram_index maybe 0,1,2 -- 7
+    char Local_Address = 0;
+    int i;
+    // CGram consists of 8 locations so if i wanna get the address then get location*8
+    if (CGram_index < 8)
+    {
+        Local_Address = 8 * CGram_index;
+        Local_Address = SET_BIT(Local_Address, 6);
+        Write_CMD_LCD(Local_Address);
+        for (i = 0; i < 8; i++)
+        {
+            // byte by byte for each location of the 8 ones
+            Write_char_LCD(Pattern[i]);
+        }
+    }
+    Write_CMD_LCD(Return_home);
+    // setCursor
+    CLCD_VidGotoXY(X, Y);
+    // show data of each pattern on the lcd
+    Write_char_LCD(CGram_index);
 }
