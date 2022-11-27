@@ -4,7 +4,7 @@
 #define DDRD *(vuint8 *)(0x31)
 #define delay                       \
   for (uint32 i = 0; i < 8000; i++) \
-    ;
+    
 
 void main()
 {
@@ -19,31 +19,31 @@ void main()
 
     // first led on and delay then off
     SET_BIT(PORTD, 5);
-    delay
+    delay;
         CLR_BIT(PORTD, 5);
     // second led on and delay then off
     SET_BIT(PORTD, 6);
-    delay
+    delay;
         CLR_BIT(PORTD, 6);
     // third led on and delay then off
     SET_BIT(PORTD, 7);
-    delay
+    delay;
         CLR_BIT(PORTD, 7);
     // buzzer on then off
     SET_BIT(PORTD, 4);
-    delay
+    delay;
         CLR_BIT(PORTD, 4);
 
     //////////////////////////////////////second task (section)/////////////////////////////////
     for (int i = 0; i <= 255; i = i * 2 + 1)
     {
       PORTD = i;
-      delay
+      delay;
     }
     for (int i = 255; i >= 1; i = i / 2)
     {
       PORTD = i;
-      delay
+      delay;
     }
   }
 }
