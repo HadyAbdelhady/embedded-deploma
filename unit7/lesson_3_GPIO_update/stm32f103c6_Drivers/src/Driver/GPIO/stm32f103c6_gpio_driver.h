@@ -1,6 +1,6 @@
 #ifndef INC_STM32F103C6_GPIO_DRIVER_H_
 #define INC_STM32F103C6_GPIO_DRIVER_H_
-#include"Z:\embeddedDiploma\embedded-deploma\embedded-deploma\unit7\lesson_3\stm32f103c6_Drivers\src\stm32f103c6.h" // Config Structure
+#include "stm32f103_X6.h"       // Config Structure
 typedef struct GPIO_CONFIG
 {
     uint16_t GPIO_Pin_Number;  // Specifies the GPIO PIN to be configured

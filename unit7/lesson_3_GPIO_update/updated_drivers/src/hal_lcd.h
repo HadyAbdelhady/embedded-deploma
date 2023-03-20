@@ -14,9 +14,9 @@ GPIO_Pin_Config_t PinCfg;
 
 
 // Options for LCD
-#define RS									GPIO_PIN_10
+#define RS									GPIO_PIN_8
 #define	RW									GPIO_PIN_9
-#define E									GPIO_PIN_8
+#define E									GPIO_PIN_10
 #define LCD_FIRST_LINE								(0)
 #define LCD_SECOND_LINE								(1)
 #define LCD_FIRST_COLUMN							(0)
