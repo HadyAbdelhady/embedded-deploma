@@ -1,8 +1,8 @@
 #include "uart.h"
 
 int main(void) {
-    // Initialize UART with baud rate of 9600
-    UART_init(9600);
+
+    UART_init(8,0,0,1,9600); // Initialize UART with 8 data bits, no parity, 1 stop bit, and 9600 baud rate
     
     // Loop forever
     while (1) {

@@ -10,8 +10,7 @@
 #define SETBIT(reg, bit, shift) ((reg) |= ((bit) << (shift)))
 
 // Initialize UART with specified baud rate
-void UART_init(uint16_t baud_rate);
-
+void UART_init(uint8_t num_data, uint8_t mode, uint8_t parity, uint8_t stop, uint16_t baud_rate);
 // Write single character to UART
 void UART_write_char(char data);
 
