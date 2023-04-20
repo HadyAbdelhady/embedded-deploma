@@ -6,15 +6,12 @@
 // This function sets the UBRR value based on the given baud rate and clock frequency
 // and configures the data frame format, parity, stop bits, and mode.
 // It also enables the receiver, transmitter, and receive complete interrupt.
-
 void UART_init(uint8_t num_data, uint8_t mode, uint8_t parity, uint8_t stop, uint16_t baud_rate)
 {
-
     // Setting baud rate
     uint16_t ubrr = F_CPU / 16 / baud_rate - 1;
     UBRRH = (uint8_t)(ubrr >> 8);
     UBRRL = (uint8_t)(ubrr);
-
     // Setting data frame size
     // num_data: the number of data bits in the data frame
     switch (num_data)

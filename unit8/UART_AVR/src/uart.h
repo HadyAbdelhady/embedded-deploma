@@ -7,7 +7,18 @@
 #define F_CPU 8000000UL
 
 // Macro to set a bit in a register
-#define SETBIT(reg, bit, shift) ((reg) |= ((bit) << (shift)))
+#define SETBIT(reg, shift, bit) ((reg) |= ((bit) << (shift)))
+typedef enum Connection_Mode
+{
+    Async,
+    Sync
+} Mode;
+typedef enum parityMode
+{
+    Parity_Disabled,
+    Parity_ODD,
+    Parity_EVEN
+} parity;
 
 // Initialize UART with specified baud rate
 void UART_init(uint8_t num_data, uint8_t mode, uint8_t parity, uint8_t stop, uint16_t baud_rate);
