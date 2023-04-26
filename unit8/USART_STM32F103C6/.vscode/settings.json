@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "stm32f103_x6.h": "c",
+        "hal_keypad.h": "c",
+        "mcal_stm32f103x6_gpio.h": "c",
+        "hal_lcd.h": "c",
+        "mcal_stm32f103c6_rcc.h": "c"
+    }
+}
